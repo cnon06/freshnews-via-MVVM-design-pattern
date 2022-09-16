@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freshnews/pages/newsListPage.dart';
+
+import 'package:freshnews/viewmodels/newsArticleListViewModel.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(App());
 
@@ -8,17 +12,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Container();
-    return MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Fresh News",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Latest News"),
-        ),
-        body: const Text("Latest News will be displayed here."),
-      ),
-      
-
+     
+     home: ChangeNotifierProvider(
+      create: (context) => NewsArticleListViewModel(),
+      child: NewsListPage()
+      )
+     
+    
 
     );
   }
