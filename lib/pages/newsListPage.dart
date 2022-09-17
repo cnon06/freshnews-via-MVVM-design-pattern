@@ -21,7 +21,7 @@ class _NewsListPage extends State<NewsListPage> {
   void initState() {
     Provider.of<NewsArticleListViewModel>(context, listen: false)
         .populateTopHeadLines();
-    // TODO: implement initState
+    
     super.initState();
   }
 
@@ -34,7 +34,6 @@ class _NewsListPage extends State<NewsListPage> {
       appBar: AppBar(
         title: const Text("Top News"),
       ),
-
       body: Column(
         children: [
           TextField(
@@ -42,8 +41,7 @@ class _NewsListPage extends State<NewsListPage> {
             // onSubmitted: (value) {
             //   vm.search(value);
             // },
-            onChanged: (value) 
-            {
+            onChanged: (value) {
               vm.search(value);
             },
             decoration: InputDecoration(
@@ -58,32 +56,29 @@ class _NewsListPage extends State<NewsListPage> {
               ),
             ),
           ),
-         // vm.articles.isEmpty ? const Text("No results found.") : NewsList(articles: vm.articles) ,
-           NewsList(articles: vm.articles) ,
+          // vm.articles.isEmpty
+          //     ? const Text("No results found.")
+          //     : NewsList(articles: vm.articles),
+          _buildList(context, vm),
+         //NewsList(articles: vm.articles) ,
         ],
       ),
-
-      // body: ListView.builder(
-      //     itemCount: vm.articles.length,
-      //     itemBuilder: (context, index) {
-      //       final article = vm.articles[index];
-
-      //       return ListTile(
-      //         leading:
-
-      //             CachedNetworkImage(
-      //               width: 70,
-
-      //             imageUrl: article.imageURL,
-      //             placeholder: (context, url) => CircularProgressIndicator(),
-      //             errorWidget: (context, url, error) => Icon(Icons.error),
-      //             ),
-
-      //         title: Text(vm.articles[index].title),
-      //       );
-      //     })
-
-      // const Text("Hello World."),
     );
   }
+
+  Widget _buildList(BuildContext context, NewsArticleListViewModel vm) {
+    switch (vm.loadingStatus) {
+      case LoadingStatus.searching:
+        return const CircularProgressIndicator();
+
+      case LoadingStatus.empty:
+        return const Text("No results found");
+
+      case LoadingStatus.completed:
+        return NewsList(articles: vm.articles);
+    }
+  }
+
+
+
 }
