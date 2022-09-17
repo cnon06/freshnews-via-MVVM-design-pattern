@@ -59,14 +59,14 @@ class _NewsListPage extends State<NewsListPage> {
           // vm.articles.isEmpty
           //     ? const Text("No results found.")
           //     : NewsList(articles: vm.articles),
-          _buildList(context, vm),
+          _buildList( vm),
          //NewsList(articles: vm.articles) ,
         ],
       ),
     );
   }
 
-  Widget _buildList(BuildContext context, NewsArticleListViewModel vm) {
+  Widget _buildList( NewsArticleListViewModel vm) {
     switch (vm.loadingStatus) {
       case LoadingStatus.searching:
         return const CircularProgressIndicator();
