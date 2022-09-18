@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:freshnews/pages/newsArticleDetailsPage.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodels/newsArticleListViewModel.dart';
@@ -12,17 +13,25 @@ class NewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final vm = Provider.of<NewsArticleListViewModel>(context);
+    final vm = Provider.of<NewsArticleListViewModel>(context);
     return Flexible(
       child: ListView.builder(
           itemCount: articles.length,
           itemBuilder: (context, index) {
             final article = vm.articles[index];
-            
+
             return ListTile(
+              onTap: () {
+                Navigator.push(context, 
+                MaterialPageRoute(builder: 
+                (_) => NewsArticleDetailsPage(article: article,)  
+                )
+                
+                );
+              },
               leading: CachedNetworkImage(
                 width: 70,
-                imageUrl: article.imageURL ,//article.imageURL,
+                imageUrl: article.imageURL, //article.imageURL,
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),

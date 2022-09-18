@@ -32,11 +32,12 @@ class _NewsListPage extends State<NewsListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Top News"),
-      ),
-      body: Column(
-        children: [
-          TextField(
+
+       
+
+        title: 
+        
+         TextField(
             controller: _controller,
             // onSubmitted: (value) {
             //   vm.search(value);
@@ -47,19 +48,24 @@ class _NewsListPage extends State<NewsListPage> {
             decoration: InputDecoration(
               labelText: "Enter search here",
               icon: const Padding(
-                  padding: EdgeInsets.all(8.0), child: Icon(Icons.search)),
+                  padding: EdgeInsets.all(8.0), child: Icon(Icons.search, color: Colors.white,)),
               suffixIcon: IconButton(
-                icon: const Icon(Icons.clear),
+                icon: const Icon(Icons.clear, color:  Colors.white,),
                 onPressed: () {
                   _controller.clear();
                 },
               ),
             ),
           ),
-          // vm.articles.isEmpty
-          //     ? const Text("No results found.")
-          //     : NewsList(articles: vm.articles),
-          _buildList( vm),
+        
+        //const Text("Top News"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          
+          Center(child: _buildList(vm)),
          //NewsList(articles: vm.articles) ,
         ],
       ),
