@@ -14,7 +14,8 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<NewsArticleListViewModel>(context);
-    return Flexible(
+    return SizedBox(
+      height: 500,
       child: ListView.builder(
           itemCount: articles.length,
           itemBuilder: (context, index) {
